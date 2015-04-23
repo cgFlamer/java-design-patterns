@@ -14,7 +14,9 @@ public class Spectator implements IObserver {
 	public void update() {
 		System.out.println("Spectatorul " + name + "  va fi notificat de inceperea spectacolului.");
 		
-		new SistemNotificare(this);
+		// singleton
+		SistemNotificare sn = SistemNotificare.getInstance();
+		sn.notifica(this);
 	}
 
 	public String getName() {

@@ -2,11 +2,24 @@ package clase;
 
 public class SistemNotificare {
 
-	public SistemNotificare(Spectator s) {
-		INotificare telefon = new NotificareTelefon();
+	INotificare first;
+	
+	private static SistemNotificare instance = null;
+	
+	private SistemNotificare() {
+		first = new NotificareTelefon();
 		INotificare email = new NotificareEmail();
-		telefon.next(email);
-		
-		telefon.notifica(s);
+		first.next(email);
+	}
+	
+	public static SistemNotificare getInstance() {
+		if(instance == null) {
+			instance = new SistemNotificare();
+		}
+		return instance;
+	}
+	
+	public void notifica(Spectator s) {
+		first.notifica(s);
 	}
 }
